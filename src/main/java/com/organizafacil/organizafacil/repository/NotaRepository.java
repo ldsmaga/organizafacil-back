@@ -6,6 +6,4 @@ import com.organizafacil.organizafacil.entity.Nota;
 
 public interface NotaRepository extends JpaRepository<Nota, Integer>{
 
-	Nota findByName(String name);
-
 }

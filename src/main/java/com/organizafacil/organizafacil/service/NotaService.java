@@ -26,9 +26,6 @@ public class NotaService {
 		return repository.findById(id).orElse(null);
 	}
 	
-	public Nota getNotaByName(String name) {
-		return repository.findByName(name);
-	}
 	
 	public String deleteNota(int id) {
 		repository.deleteById(id);

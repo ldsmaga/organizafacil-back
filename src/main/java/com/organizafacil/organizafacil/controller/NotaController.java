@@ -35,11 +35,6 @@ public class NotaController {
 		return service.getNotaById(id);
 	}
 	
-	@GetMapping("/nota/{name}")
-	public Nota findNotaByName(@PathVariable String name) {
-		return service.getNotaByName(name);
-	}
-	
 	@PutMapping("/editar")
 	public Nota updateNota(@RequestBody Nota nota) {
 		return service.updateNota(nota);
