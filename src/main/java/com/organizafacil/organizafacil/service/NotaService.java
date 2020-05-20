@@ -33,9 +33,9 @@ public class NotaService {
 	}
 	
 	public Nota updateNota(Nota nota) {
-		Nota notaAtual = repository.findById(nota.getIdNota()).orElse(null);
-		notaAtual.setConteudo(nota.getConteudo());
-		notaAtual.setStatusNota(nota.getStatusNota());
+		Nota notaAtual = repository.findById(nota.getIdAnotacao()).orElse(null);
+		notaAtual.setConteudo_anotacao(nota.getConteudo_anotacao());
+		notaAtual.setStatus_anotacao(nota.getStatus_anotacao());
 		return repository.save(notaAtual);
 	}
 }

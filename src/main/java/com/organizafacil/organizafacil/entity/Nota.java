@@ -2,7 +2,10 @@ package com.organizafacil.organizafacil.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
@@ -13,32 +16,44 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "nota")
+@Table(name = "anotacao")	
 public class Nota {	
 	@Id
-	@GeneratedValue
-	private int idNota;
-	private String conteudo;
-	private String statusNota;
-	public int getIdNota() {
-		return idNota;
-	}
-	public void setIdNota(int idNota) {
-		this.idNota = idNota;
-	}
-	public String getConteudo() {
-		return conteudo;
-	}
-	public void setConteudo(String conteudo) {
-		this.conteudo = conteudo;
-	}
-	public String getStatusNota() {
-		return statusNota;
-	}
-	public void setStatusNota(String statusNota) {
-		this.statusNota = statusNota;
-	}
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int idAnotacao;
+	private String conteudo_anotacao;
+	private String status_anotacao;
+	
+	
 
+	@ManyToOne
+	@JoinColumn(name = "idUsuario")
+	private Usuario usuario;
+	
+	public int getIdAnotacao() {
+		return idAnotacao;
+	}
+	public void setIdAnotacao(int idAnotacao) {
+		this.idAnotacao = idAnotacao;
+	}
+	public String getConteudo_anotacao() {
+		return conteudo_anotacao;
+	}
+	public void setConteudo_anotacao(String conteudo_anotacao) {
+		this.conteudo_anotacao = conteudo_anotacao;
+	}
+	public String getStatus_anotacao() {
+		return status_anotacao;
+	}
+	public void setStatus_anotacao(String status_anotacao) {
+		this.status_anotacao = status_anotacao;
+	}
+	
+	
+	
+
+
+	
 	
 	
 
