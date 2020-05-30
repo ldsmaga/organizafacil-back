@@ -1,24 +1,43 @@
 package com.organizafacil.organizafacil.config;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+
+import com.organizafacil.organizafacil.security.JWTAuthenticationFilter;
+import com.organizafacil.organizafacil.security.JWTUtil;
 
 @Configuration //classe de configuração
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	
+	@Autowired
+	private JWTUtil jwtUtil;
+	
+	@Autowired
+	private UserDetailsService userDetailsService;
+	
 	//declara rotas para liberar a autenticação:
+	
+
+	private static final String[] PUBLIC_MATCHERS_POST = {
+			"/adicionarUsuario"
+			
+	};
+	
 	private static final String[] PUBLIC_MATCHERS_GET = {
-			"/notas",
-			"/tarefas"
+			"/notas"
 			
 	};
 	
@@ -28,9 +47,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception{
 		http.cors().and().csrf().disable();//aplica o metodo cors definido abaixo, por padrão não são permitidas
 		//requisições cross-origin
-		http.authorizeRequests()
+		http.authorizeRequests().antMatchers(HttpMethod.POST, PUBLIC_MATCHERS_POST).permitAll()
 		.antMatchers(HttpMethod.GET, PUBLIC_MATCHERS_GET).permitAll() //permita todas rotas no publicmatchers
 		.anyRequest().authenticated(); //de resto, solicite autorização
+		http.addFilter(new JWTAuthenticationFilter(authenticationManager(), jwtUtil));
 		http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS); //assegura que o armazenamento seja stateless, para evitar ataques csrf
 	}
 	
@@ -42,5 +62,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	    source.registerCorsConfiguration("/**", new CorsConfiguration().applyPermitDefaultValues());
 	    return source;	
 	  }
+	
+	@Override
+	public void configure(AuthenticationManagerBuilder auth) throws Exception {
+		auth.userDetailsService(userDetailsService).passwordEncoder(bCryptPasswordEncoder());
+	}
+	
+	
+	//declaro o BCryptPasswordEncoder para poder injetar em qualquer classe do sistema
+	//para criptografar senhas
+	@Bean
+	public BCryptPasswordEncoder bCryptPasswordEncoder() {
+		return new BCryptPasswordEncoder();
+	}
 
 }

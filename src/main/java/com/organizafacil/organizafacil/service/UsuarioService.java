@@ -3,6 +3,7 @@ package com.organizafacil.organizafacil.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.organizafacil.organizafacil.entity.Usuario;
@@ -15,6 +16,8 @@ public class UsuarioService {
 	private UsuarioRepository repository;
 	
 	public Usuario saveUsuario(Usuario usuario) {
+		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+		usuario.setSenha(passwordEncoder.encode(usuario.getSenha()));
 		return repository.save(usuario);
 	}
 	
