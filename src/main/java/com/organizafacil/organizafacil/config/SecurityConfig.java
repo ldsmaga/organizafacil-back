@@ -16,6 +16,7 @@ import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import com.organizafacil.organizafacil.security.JWTAuthenticationFilter;
+import com.organizafacil.organizafacil.security.JWTAuthorizationFilter;
 import com.organizafacil.organizafacil.security.JWTUtil;
 
 @Configuration //classe de configuração
@@ -51,6 +52,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		.antMatchers(HttpMethod.GET, PUBLIC_MATCHERS_GET).permitAll() //permita todas rotas no publicmatchers
 		.anyRequest().authenticated(); //de resto, solicite autorização
 		http.addFilter(new JWTAuthenticationFilter(authenticationManager(), jwtUtil));
+		http.addFilter(new JWTAuthorizationFilter(authenticationManager(), jwtUtil, userDetailsService));
 		http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS); //assegura que o armazenamento seja stateless, para evitar ataques csrf
 	}
 	
