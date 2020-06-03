@@ -19,8 +19,9 @@ public class JWTUtil {
 	private Long expiration;
 	
 	//gera o token:
-	public String generateToken(String username) {
+	public String generateToken(String username, Integer id) {
 		return Jwts.builder()
+				.setId(id.toString())
 				.setSubject(username)
 				.setExpiration(new Date(System.currentTimeMillis() + expiration))
 				.signWith(SignatureAlgorithm.HS512, secret.getBytes())
@@ -42,6 +43,16 @@ public class JWTUtil {
 	}
 
 	public String getUsername(String token) {
+		Claims claims = getClaims(token);
+		if (claims != null) {
+			return claims.getId();
+		}
+		return null;
+	}
+	
+
+
+	public String getIdUsuario(String token) {
 		Claims claims = getClaims(token);
 		if (claims != null) {
 			return claims.getSubject();

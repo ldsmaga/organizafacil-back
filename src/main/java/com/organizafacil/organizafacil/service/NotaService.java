@@ -14,6 +14,7 @@ import com.organizafacil.organizafacil.entity.Usuario;
 import com.organizafacil.organizafacil.enums.Perfis;
 import com.organizafacil.organizafacil.excecoes.AuthorizationException;
 import com.organizafacil.organizafacil.repository.NotaRepository;
+import com.organizafacil.organizafacil.security.JWTUtil;
 import com.organizafacil.organizafacil.security.UserSS;
 
 @Service
@@ -23,6 +24,8 @@ public class NotaService {
 	
 	@Autowired
 	private UsuarioService usuarioService;
+	
+	private JWTUtil jwtutil;
 	
 	public Nota saveNota(Nota nota) {
 		return repository.save(nota);
@@ -71,7 +74,7 @@ public class NotaService {
 		}
 		PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
 		Usuario usuario =  usuarioService.find(user.getId());
-		return repository.findByUsuario(usuario, pageRequest);
+		return repository.findByIdUsuario(usuario, pageRequest);
 	}
 	
 	

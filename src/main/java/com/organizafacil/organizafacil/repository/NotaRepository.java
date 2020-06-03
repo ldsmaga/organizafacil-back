@@ -10,6 +10,6 @@ import com.organizafacil.organizafacil.entity.Usuario;
 
 public interface NotaRepository extends JpaRepository<Nota, Integer>{
 	@Transactional(readOnly=true)
-	Page<Nota> findByUsuario(Usuario usuario, Pageable pageRequest);
+	Page<Nota> findByIdUsuario(Usuario idUsuario, Pageable pageRequest);
 	
 }

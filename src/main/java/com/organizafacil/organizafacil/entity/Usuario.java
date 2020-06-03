@@ -35,13 +35,13 @@ public class Usuario {
 	private int idUsuario;
 	private String nome;
 	private String email;
-	private String status;
+	private String statusUsuario;
 	private String login;
 	
 	//@JsonIgnore //anotação para ignorar caso liste um json
 	private String senha;
 	
-	@OneToMany(mappedBy="usuario")
+	@OneToMany(mappedBy="idUsuario")
 	private List<Nota> nota = new ArrayList<>();
 	
 	public Usuario() {
@@ -50,7 +50,7 @@ public class Usuario {
 	
 	public Usuario(Integer idUsuario, String nome, String email, String login, String senha) {
 		super();
-		this.status = "ativo";
+		this.statusUsuario = "ativo";
 		this.idUsuario = idUsuario;
 		this.nome = nome;
 		this.email = email;
@@ -83,11 +83,11 @@ public class Usuario {
 	}
 
 	public String getStatus() {
-		return status;
+		return statusUsuario;
 	}
 
 	public void setStatus(String status) {
-		this.status = status;
+		this.statusUsuario = status;
 	}
 
 	public String getLogin() {

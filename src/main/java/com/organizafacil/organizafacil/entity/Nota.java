@@ -8,6 +8,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.organizafacil.organizafacil.security.JWTUtil;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -24,11 +26,10 @@ public class Nota {
 	private String conteudo_anotacao;
 	private String status_anotacao;
 	
-	
 
 	@ManyToOne
 	@JoinColumn(name = "idUsuario")
-	private Usuario usuario;
+	private Usuario idUsuario;
 	
 	public int getIdAnotacao() {
 		return idAnotacao;
@@ -48,13 +49,11 @@ public class Nota {
 	public void setStatus_anotacao(String status_anotacao) {
 		this.status_anotacao = status_anotacao;
 	}
+	public Usuario getIdUsuario() {
+		return idUsuario;
+	}
+	public void setIdUsuario(Usuario idUsuario) {
+		this.idUsuario = idUsuario;
+	}
 	
-	
-	
-
-
-	
-	
-	
-
 }
