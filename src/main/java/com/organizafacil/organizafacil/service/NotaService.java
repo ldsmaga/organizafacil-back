@@ -33,10 +33,10 @@ public class NotaService {
 	
 	public List<Nota> getNotas(){
 
-		UserSS user = UserService.authenticated();
-		if (user==null) {
-			throw new AuthorizationException("Acesso negado");
-		}
+//		UserSS user = UserService.authenticated();
+//		if (user==null) {
+//			throw new AuthorizationException("Acesso negado");
+//		}
 		return repository.findAll();
 	}
 	
