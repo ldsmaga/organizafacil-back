@@ -25,9 +25,18 @@ public class NotaService {
 	@Autowired
 	private UsuarioService usuarioService;
 	
-	private JWTUtil jwtutil;
-	
 	public Nota saveNota(Nota nota) {
+		UserSS user = UserService.authenticated();
+		
+		//setar os dados do user para passar para nota:
+		Usuario usuario = new Usuario();
+		usuario.setIdUsuario(user.getId());
+		usuario.setEmail(user.getUsername());
+		usuario.setSenha(user.getPassword());
+		
+		//passo para a nota:
+		nota.setIdUsuario(usuario);
+
 		return repository.save(nota);
 	}
 	
@@ -66,6 +75,8 @@ public class NotaService {
 		return repository.save(notaAtual);
 	}
 	
+	
+	//traz as notas apenas do user logado:
 	
 	public Page<Nota> findPage(Integer page, Integer linesPerPage, String orderBy, String direction) {
 		UserSS user = UserService.authenticated();

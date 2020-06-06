@@ -32,7 +32,7 @@ public class Usuario {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int idUsuario;
+	private Integer idUsuario;
 	private String nome;
 	private String email;
 	private String statusUsuario;
@@ -40,6 +40,9 @@ public class Usuario {
 	
 	//@JsonIgnore //anotação para ignorar caso liste um json
 	private String senha;
+
+	@OneToMany(mappedBy="idUsuario")
+	private List<Tarefa> tarefa = new ArrayList<>();
 	
 	@OneToMany(mappedBy="idUsuario")
 	private List<Nota> nota = new ArrayList<>();
@@ -58,11 +61,11 @@ public class Usuario {
 		this.senha = senha;
 	}
 
-	public int getIdUsuario() {
+	public Integer getIdUsuario() {
 		return idUsuario;
 	}
 
-	public void setIdUsuario(int idUsuario) {
+	public void setIdUsuario(Integer idUsuario) {
 		this.idUsuario = idUsuario;
 	}
 
@@ -106,9 +109,13 @@ public class Usuario {
 		this.senha = senha;
 	}
 
-	public List<Nota> getNota() {
-		return nota;
-	}
+//	public List<Nota> getNota() {
+//		return nota;
+//	}
+//	
+//	public List<Tarefa> getTarefa() {
+//		return tarefa;
+//	}
 	
 
 	public Set<Perfis> getPerfis() {

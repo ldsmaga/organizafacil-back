@@ -27,7 +27,7 @@ public class Tarefa {
 
 	@ManyToOne
 	@JoinColumn(name = "idUsuario")
-	private Usuario usuario;
+	private Usuario idUsuario;
 	
 	
 	public int getIdTarefa() {
@@ -48,6 +48,13 @@ public class Tarefa {
 	public void setStatus_tarefa(String status_tarefa) {
 		this.status_tarefa = status_tarefa;
 	}
+	public Usuario getUsuario() {
+		return idUsuario;
+	}
+	public void setUsuario(Usuario idUsuario) {
+		this.idUsuario = idUsuario;
+	}
+	
 	
 	
 }

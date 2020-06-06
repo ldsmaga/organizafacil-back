@@ -56,4 +56,12 @@ public class Nota {
 		this.idUsuario = idUsuario;
 	}
 	
+	@Override
+	public String toString() {
+		return "Nota [idAnotacao=" + idAnotacao + ", conteudo_anotacao=" + conteudo_anotacao + ", status_anotacao="
+				+ status_anotacao + ", idUsuario=" + idUsuario + "]";
+	}
+	
+	
+	
 }
