@@ -1,7 +1,7 @@
 package com.organizafacil.organizafacil.dto;
 
 public class CredenciaisDTO {
-	private static final long serialVersionUID = 1L;
+//	private static final long serialVersionUID = 1L;
 	
 	private String email;
 	private String senha;

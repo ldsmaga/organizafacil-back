@@ -25,7 +25,7 @@ public class UsuarioController {
 		return "Login ok";
 	}
 	
-	@PostMapping("/adicionarUsuario")
+	@PostMapping("/cadastro")
 	public Usuario addUsuario(@RequestBody Usuario usuario) {
 		return service.saveUsuario(usuario);
 	}

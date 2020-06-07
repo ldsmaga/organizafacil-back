@@ -113,9 +113,9 @@ public class Usuario {
 //		return nota;
 //	}
 //	
-//	public List<Tarefa> getTarefa() {
-//		return tarefa;
-//	}
+	public List<Tarefa> retornaTarefas() {
+		return tarefa;
+	}
 	
 
 	public Set<Perfis> getPerfis() {
@@ -129,6 +129,8 @@ public class Usuario {
 	@ElementCollection(fetch=FetchType.EAGER)
 	@CollectionTable(name="PERFIS")
 	private Set<Integer> perfis = new HashSet<>();
+
+
 	
 	
 

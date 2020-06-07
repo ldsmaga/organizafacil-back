@@ -12,6 +12,8 @@ import com.organizafacil.organizafacil.enums.Perfis;
 
 public class UserSS implements UserDetails{
 	
+	private static final long serialVersionUID = 1L;
+	
 	private Integer id;
 	private String email;
 	private String senha;

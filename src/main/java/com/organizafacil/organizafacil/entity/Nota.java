@@ -8,8 +8,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import com.organizafacil.organizafacil.security.JWTUtil;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -49,11 +47,11 @@ public class Nota {
 	public void setStatus_anotacao(String status_anotacao) {
 		this.status_anotacao = status_anotacao;
 	}
-	public Usuario getIdUsuario() {
+	public Usuario getUsuario() {
 		return idUsuario;
 	}
-	public void setIdUsuario(Usuario idUsuario) {
-		this.idUsuario = idUsuario;
+	public void setUsuario(Usuario usuario) {
+		this.idUsuario = usuario;
 	}
 	
 	@Override

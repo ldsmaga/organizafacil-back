@@ -33,14 +33,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	
 
 	private static final String[] PUBLIC_MATCHERS_POST = {
-			"/adicionarUsuario"
+			"/cadastro"
 			
 	};
 	
-	private static final String[] PUBLIC_MATCHERS_GET = {
-			"/tarefas"
-			
-	};
+//	private static final String[] PUBLIC_MATCHERS_GET = {
+//			//insira codigo para liberar rota get
+//	};
 	
 	
 	//libera classes da autenticação jwt
@@ -48,8 +47,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception{
 		http.cors().and().csrf().disable();//aplica o metodo cors definido abaixo, por padrão não são permitidas
 		//requisições cross-origin
-		http.authorizeRequests().antMatchers(HttpMethod.POST, PUBLIC_MATCHERS_POST).permitAll()
-		.antMatchers(HttpMethod.GET, PUBLIC_MATCHERS_GET).permitAll() //permita todas rotas no publicmatchers
+		http.authorizeRequests().antMatchers(HttpMethod.POST, PUBLIC_MATCHERS_POST).permitAll()//permita todas rotas no publicmatchers
 		.anyRequest().authenticated(); //de resto, solicite autorização
 		http.addFilter(new JWTAuthenticationFilter(authenticationManager(), jwtUtil));
 		http.addFilter(new JWTAuthorizationFilter(authenticationManager(), jwtUtil, userDetailsService));

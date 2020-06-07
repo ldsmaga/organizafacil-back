@@ -54,6 +54,11 @@ public class Tarefa {
 	public void setUsuario(Usuario idUsuario) {
 		this.idUsuario = idUsuario;
 	}
+	@Override
+	public String toString() {
+		return "Tarefa [idTarefa=" + idTarefa + ", conteudo_tarefa=" + conteudo_tarefa + ", status_tarefa="
+				+ status_tarefa + ", idUsuario=" + idUsuario + "]";
+	}
 	
 	
 	
