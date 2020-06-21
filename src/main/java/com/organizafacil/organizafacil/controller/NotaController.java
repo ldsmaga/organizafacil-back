@@ -43,7 +43,7 @@ public class NotaController {
 	}
 
 	@GetMapping("/{id}")
-	public Nota findNotaById(@PathVariable int id) {
+	public Nota findNotaById(@PathVariable Integer id) {
 		return service.getNotaById(id);
 	}
 	
