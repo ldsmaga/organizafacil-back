@@ -58,7 +58,17 @@ public class NotaController {
 		return service.inativarNota(nota);
 	}
 	
+
+	@PutMapping("/arquivar")
+	public Nota arquivarTarefa(@RequestBody Nota nota) {
+		return service.arquivarNota(nota);
+	}
 	
+
+	@PutMapping("/desarquivar")
+	public Nota desarquivarTarefa(@RequestBody Nota nota) {
+		return service.desarquivarNota(nota);
+	}
 	
 	
 //	@DeleteMapping("/apagar/{id}")

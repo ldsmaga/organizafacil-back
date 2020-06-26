@@ -57,6 +57,16 @@ public class TarefaController {
 			return service.inativarTarefa(tarefa);
 		}
 		
+		@PutMapping("/arquivar")
+		public Tarefa arquivarTarefa(@RequestBody Tarefa tarefa) {
+			return service.arquivarTarefa(tarefa);
+		}
+
+		@PutMapping("/desarquivar")
+		public Tarefa desarquivarTarefa(@RequestBody Tarefa tarefa) {
+			return service.desarquivarTarefa(tarefa);
+		}
+		
 		
 //		@DeleteMapping("/apagar/{id}")
 //		public String deleteTarefa(@PathVariable int id) {

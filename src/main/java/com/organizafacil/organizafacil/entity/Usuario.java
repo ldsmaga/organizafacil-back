@@ -16,6 +16,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.organizafacil.organizafacil.enums.Perfis;
 
 import lombok.AllArgsConstructor;
@@ -38,7 +40,6 @@ public class Usuario {
 	private String statusUsuario;
 	private String login;
 	
-	//@JsonIgnore //anotação para ignorar caso liste um json
 	private String senha;
 
 	@OneToMany(mappedBy="idUsuario")
@@ -101,10 +102,11 @@ public class Usuario {
 		this.login = login;
 	}
 
+	@JsonIgnore //anotação para ignorar caso liste um json
 	public String getSenha() {
 		return senha;
 	}
-
+	@JsonProperty
 	public void setSenha(String senha) {
 		this.senha = senha;
 	}

@@ -70,7 +70,18 @@ public class NotaService {
 		notaAtual.setStatus_anotacao("inativo");
 		return repository.save(notaAtual);
 	}
+	
+	public Nota arquivarNota(Nota nota) {		
+		Nota notaAtual = repository.findById(nota.getIdAnotacao()).orElse(null);
+		notaAtual.setStatus_anotacao("arquivado");
+		return repository.save(notaAtual);
+	}
 
+	public Nota desarquivarNota(Nota nota) {		
+		Nota notaAtual = repository.findById(nota.getIdAnotacao()).orElse(null);
+		notaAtual.setStatus_anotacao("ativo");
+		return repository.save(notaAtual);
+	}
 
 	public Nota updateNota(Nota nota) {
 		Nota notaAtual = repository.findById(nota.getIdAnotacao()).orElse(null);

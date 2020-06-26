@@ -68,6 +68,18 @@ public class TarefaService {
 		tarefaAtual.setStatus_tarefa("inativo");
 		return repository.save(tarefaAtual);
 	}
+	
+	public Tarefa arquivarTarefa(Tarefa tarefa) {
+		Tarefa tarefaAtual = repository.findById(tarefa.getIdTarefa()).orElse(null);
+		tarefaAtual.setStatus_tarefa("arquivado");
+		return repository.save(tarefaAtual);
+	}
+	
+	public Tarefa desarquivarTarefa(Tarefa tarefa) {
+		Tarefa tarefaAtual = repository.findById(tarefa.getIdTarefa()).orElse(null);
+		tarefaAtual.setStatus_tarefa("ativo");
+		return repository.save(tarefaAtual);
+	}
 
 	public Tarefa updateTarefa(Tarefa tarefa) {
 		Tarefa tarefaAtual = repository.findById(tarefa.getIdTarefa()).orElse(null);
