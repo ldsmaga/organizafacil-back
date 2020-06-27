@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -19,6 +20,9 @@ public class UsuarioService {
 	
 	@Autowired
 	private UsuarioRepository repository;
+	
+	@Autowired
+	private UserDetailsServiceImpl userDetails;
 	
 	public Usuario saveUsuario(Usuario usuario) {
 		if(repository.findByEmail(usuario.getEmail())!= null){
@@ -44,6 +48,42 @@ public Usuario find(Integer id) {
 		return obj.orElseThrow(() -> new ObjectNotFoundException(
 				"Objeto não encontrado! Id: " + id + ", Tipo: " + Usuario.class.getName()));
 	}
+
+
+	public UserDetails dados(String email) {
+		return userDetails.loadUserByUsername(email);
+	}
 	
+	public Usuario updateUsuario(Usuario usuario) {
+		
+
+		UserSS user = UserService.authenticated();
+		
+		
+		if(repository.findById(usuario.getIdUsuario()).get().getIdUsuario() != user.getId()) {
+			throw new AuthorizationException("Acesso negado");			
+		}
+		
+		
+		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+		Usuario usuarioAtual = repository.findById(usuario.getIdUsuario()).orElse(null);
+		usuarioAtual.setNome(usuario.getNome());
+		usuarioAtual.setEmail(usuario.getEmail());
+		usuarioAtual.setSenha(passwordEncoder.encode(usuario.getSenha()));
+		return repository.save(usuarioAtual);
+	}
+	
+	
+	public Usuario inativarUsuario(Usuario usuario) {	
+		UserSS user = UserService.authenticated();
+		
+		
+		if(repository.findById(usuario.getIdUsuario()).get().getIdUsuario() != user.getId()) {
+			throw new AuthorizationException("Acesso negado");			
+		}	
+		Usuario usuarioAtual = repository.findById(usuario.getIdUsuario()).orElse(null);
+		usuarioAtual.setStatusUsuario("inativo");
+		return repository.save(usuarioAtual);
+	}
 
 }

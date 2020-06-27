@@ -64,24 +64,48 @@ public class TarefaService {
 	}
 	
 	public Tarefa inativarTarefa(Tarefa tarefa) {
+		UserSS user = UserService.authenticated();
+		
+		
+		if(repository.findById(tarefa.getIdTarefa()).get().getUsuario().getIdUsuario() != user.getId()) {
+			throw new AuthorizationException("Acesso negado");			
+		}
 		Tarefa tarefaAtual = repository.findById(tarefa.getIdTarefa()).orElse(null);
 		tarefaAtual.setStatus_tarefa("inativo");
 		return repository.save(tarefaAtual);
 	}
 	
 	public Tarefa arquivarTarefa(Tarefa tarefa) {
+		UserSS user = UserService.authenticated();
+		
+		
+		if(repository.findById(tarefa.getIdTarefa()).get().getUsuario().getIdUsuario() != user.getId()) {
+			throw new AuthorizationException("Acesso negado");			
+		}
 		Tarefa tarefaAtual = repository.findById(tarefa.getIdTarefa()).orElse(null);
 		tarefaAtual.setStatus_tarefa("arquivado");
 		return repository.save(tarefaAtual);
 	}
 	
 	public Tarefa desarquivarTarefa(Tarefa tarefa) {
+		UserSS user = UserService.authenticated();
+		
+		
+		if(repository.findById(tarefa.getIdTarefa()).get().getUsuario().getIdUsuario() != user.getId()) {
+			throw new AuthorizationException("Acesso negado");			
+		}
 		Tarefa tarefaAtual = repository.findById(tarefa.getIdTarefa()).orElse(null);
 		tarefaAtual.setStatus_tarefa("ativo");
 		return repository.save(tarefaAtual);
 	}
 
 	public Tarefa updateTarefa(Tarefa tarefa) {
+		UserSS user = UserService.authenticated();
+		
+		
+		if(repository.findById(tarefa.getIdTarefa()).get().getUsuario().getIdUsuario() != user.getId()) {
+			throw new AuthorizationException("Acesso negado");			
+		}
 		Tarefa tarefaAtual = repository.findById(tarefa.getIdTarefa()).orElse(null);
 		tarefaAtual.setConteudo_tarefa(tarefa.getConteudo_tarefa());
 		tarefaAtual.setStatus_tarefa(tarefa.getStatus_tarefa());

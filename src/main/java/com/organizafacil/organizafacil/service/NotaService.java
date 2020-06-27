@@ -65,30 +65,56 @@ public class NotaService {
 	}
 
 
-	public Nota inativarNota(Nota nota) {		
+	public Nota inativarNota(Nota nota) {
+		UserSS user = UserService.authenticated();
+		
+		
+		if(repository.findById(nota.getIdAnotacao()).get().getUsuario().getIdUsuario() != user.getId()) {
+			throw new AuthorizationException("Acesso negado");			
+		}		
 		Nota notaAtual = repository.findById(nota.getIdAnotacao()).orElse(null);
 		notaAtual.setStatus_anotacao("inativo");
 		return repository.save(notaAtual);
 	}
 	
-	public Nota arquivarNota(Nota nota) {		
+	public Nota arquivarNota(Nota nota) {	
+		UserSS user = UserService.authenticated();
+		
+		
+		if(repository.findById(nota.getIdAnotacao()).get().getUsuario().getIdUsuario() != user.getId()) {
+			throw new AuthorizationException("Acesso negado");			
+		}	
 		Nota notaAtual = repository.findById(nota.getIdAnotacao()).orElse(null);
 		notaAtual.setStatus_anotacao("arquivado");
 		return repository.save(notaAtual);
 	}
 
-	public Nota desarquivarNota(Nota nota) {		
+	public Nota desarquivarNota(Nota nota) {	
+		UserSS user = UserService.authenticated();
+		
+		
+		if(repository.findById(nota.getIdAnotacao()).get().getUsuario().getIdUsuario() != user.getId()) {
+			throw new AuthorizationException("Acesso negado");			
+		}	
 		Nota notaAtual = repository.findById(nota.getIdAnotacao()).orElse(null);
 		notaAtual.setStatus_anotacao("ativo");
 		return repository.save(notaAtual);
 	}
 
 	public Nota updateNota(Nota nota) {
+		UserSS user = UserService.authenticated();
+		
+		
+		if(repository.findById(nota.getIdAnotacao()).get().getUsuario().getIdUsuario() != user.getId()) {
+			throw new AuthorizationException("Acesso negado");			
+		}
+		
 		Nota notaAtual = repository.findById(nota.getIdAnotacao()).orElse(null);
 		notaAtual.setConteudo_anotacao(nota.getConteudo_anotacao());
 		notaAtual.setStatus_anotacao(nota.getStatus_anotacao());
 		return repository.save(notaAtual);
 	}
+	
 	
 //	public String deleteNota(int id) {
 //		repository.deleteById(id);

@@ -39,7 +39,7 @@ public class Usuario {
 	private String nome;
     @Column(unique=true)
 	private String email;
-	private String statusUsuario;
+	private String statusUsuario = "ativo";
 	private String login;
 	
 	private String senha;
@@ -56,7 +56,6 @@ public class Usuario {
 	
 	public Usuario(Integer idUsuario, String nome, String email, String login, String senha) {
 		super();
-		this.statusUsuario = "ativo";
 		this.idUsuario = idUsuario;
 		this.nome = nome;
 		this.email = email;
@@ -88,13 +87,14 @@ public class Usuario {
 		this.email = email;
 	}
 
-	public String getStatus() {
+	public String getStatusUsuario() {
 		return statusUsuario;
 	}
-
-	public void setStatus(String status) {
-		this.statusUsuario = status;
+	
+	public void setStatusUsuario(String statusUsuario) {
+		this.statusUsuario= statusUsuario;
 	}
+	
 
 	public String getLogin() {
 		return login;
