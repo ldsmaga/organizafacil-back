@@ -21,6 +21,9 @@ public class UsuarioService {
 	private UsuarioRepository repository;
 	
 	public Usuario saveUsuario(Usuario usuario) {
+		if(repository.findByEmail(usuario.getEmail())!= null){
+			throw new AuthorizationException("Usuário já cadastrado");
+		}
 		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 		usuario.setSenha(passwordEncoder.encode(usuario.getSenha()));
 		return repository.save(usuario);
