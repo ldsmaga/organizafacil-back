@@ -74,16 +74,15 @@ public Usuario find(Integer id) {
 	}
 	
 	
-	public Usuario inativarUsuario(Usuario usuario) {	
+	public void removerUsuario(Usuario usuario) {	
 		UserSS user = UserService.authenticated();
 		
 		
 		if(repository.findById(usuario.getIdUsuario()).get().getIdUsuario() != user.getId()) {
 			throw new AuthorizationException("Acesso negado");			
 		}	
-		Usuario usuarioAtual = repository.findById(usuario.getIdUsuario()).orElse(null);
-		usuarioAtual.setStatusUsuario("inativo");
-		return repository.save(usuarioAtual);
+System.out.println(usuario);
+		repository.delete(usuario);
 	}
 
 }
