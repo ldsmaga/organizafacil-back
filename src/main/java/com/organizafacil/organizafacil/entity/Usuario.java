@@ -134,12 +134,7 @@ public class Usuario {
 	@CollectionTable(name="PERFIS")
 	private Set<Integer> perfis = new HashSet<>();
 
-	@Override
-	public String toString() {
-		return "Usuario [idUsuario=" + idUsuario + ", nome=" + nome + ", email=" + email + ", statusUsuario="
-				+ statusUsuario + ", login=" + login + ", senha=" + senha + ", tarefa=" + tarefa + ", nota=" + nota
-				+ ", perfis=" + perfis + "]";
-	}
+
 
 
 	
